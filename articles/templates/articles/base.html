@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="{{ theme }}">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Онлайн-энциклопедия</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body class="{{ theme }}-theme">
+    <header>
+        <h1>📚 Онлайн-энциклопедия</h1>
+        <div class="theme-switcher">
+            <a href="{% url 'set_theme' %}?theme=light" class="btn">Светлая тема</a>
+            <a href="{% url 'set_theme' %}?theme=dark" class="btn">Тёмная тема</a>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2025 Онлайн-энциклопедия. Все права защищены.</p>
+    </footer>
+</body>
+</html>

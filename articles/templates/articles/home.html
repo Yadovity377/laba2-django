@@ -1,0 +1,18 @@
+{% extends 'articles/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h2>Статьи энциклопедии</h2>
+    <div class="articles-grid">
+        {% for article in articles %}
+        <div class="article-card">
+            <img src="{{ article.image }}" alt="{{ article.title }}" class="article-image">
+            <h3>{{ article.title }}</h3>
+            <p>{{ article.content|truncatewords:20 }}</p>
+            <a href="{% url 'article_detail' article.id %}" class="btn">Читать далее</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
