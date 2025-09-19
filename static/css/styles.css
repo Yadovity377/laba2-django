@@ -116,3 +116,70 @@ footer {
     color: var(--text-primary);
     margin-top: 3rem;
 }
+
+.preferences-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.preferences-form label {
+    font-weight: 500;
+}
+
+.preferences-form select,
+.preferences-form button {
+    padding: 6px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.preferences-form button {
+    background: var(--accent);
+    color: var(--button-text);
+    cursor: pointer;
+}
+
+.preferences-form button:hover {
+    background: #0056b3;
+}
+
+/* Стили для формы поиска */
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 20px;
+}
+
+.search-input {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    min-width: 200px;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.last-search {
+    background: var(--card-bg);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.no-results {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin: 2rem 0;
+}

@@ -1,18 +1,28 @@
+<!-- articles/templates/articles/home.html -->
 {% extends 'articles/base.html' %}
 {% load static %}
 
 {% block content %}
 <div class="container">
-    <h2>Статьи энциклопедии</h2>
-    <div class="articles-grid">
-        {% for article in articles %}
-        <div class="article-card">
-            <img src="{{ article.image }}" alt="{{ article.title }}" class="article-image">
-            <h3>{{ article.title }}</h3>
-            <p>{{ article.content|truncatewords:20 }}</p>
-            <a href="{% url 'article_detail' article.id %}" class="btn">Читать далее</a>
+    {% if query %}
+        <h2>Результаты поиска для: "{{ query }}"</h2>
+    {% else %}
+        <h2>Все статьи</h2>
+    {% endif %}
+
+    {% if articles %}
+        <div class="articles-grid">
+            {% for article in articles %}
+            <div class="article-card">
+                <img src="{{ article.image }}" alt="{{ article.title }}" class="article-image">
+                <h3>{{ article.title }}</h3>
+                <p>{{ article.content|truncatewords:20 }}</p>
+                <a href="{% url 'article_detail' article.id %}" class="btn">Читать далее</a>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
+    {% else %}
+        <p class="no-results">Ничего не найдено по запросу "{{ query }}". Попробуйте другой запрос.</p>
+    {% endif %}
 </div>
 {% endblock %}

@@ -1,6 +1,7 @@
+<!-- articles/templates/articles/base.html -->
+     {% load static %}
 <!DOCTYPE html>
 <html lang="ru" data-theme="{{ theme }}">
-{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,13 +11,26 @@
 <body class="{{ theme }}-theme">
     <header>
         <h1>📚 Онлайн-энциклопедия</h1>
+        
+        <!-- Форма поиска через Django Forms -->
+        <form method="GET" action="{% url 'home' %}" class="search-form">
+            {{ form.q }}  <!-- Рендерим только поле ввода -->
+            <button type="submit" class="btn">🔍 Найти</button>
+        </form>
+
+        <!-- Переключатель темы -->
         <div class="theme-switcher">
-            <a href="{% url 'set_theme' %}?theme=light" class="btn">Светлая тема</a>
-            <a href="{% url 'set_theme' %}?theme=dark" class="btn">Тёмная тема</a>
+            <a href="?theme=light" class="btn">Светлая</a>
+            <a href="?theme=dark" class="btn">Темная</a>
         </div>
     </header>
 
     <main>
+        {% if last_query and not query %}
+            <div class="last-search">
+                <p>Последний поиск: <strong>"{{ last_query }}"</strong></p>
+            </div>
+        {% endif %}
         {% block content %}{% endblock %}
     </main>
 
