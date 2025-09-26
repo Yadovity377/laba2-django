@@ -1,20 +1,20 @@
-<!-- articles/templates/articles/base.html -->
-     {% load static %}
 <!DOCTYPE html>
 <html lang="ru" data-theme="{{ theme }}">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>📚 Онлайн-энциклопедия</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
+
 <body class="{{ theme }}-theme">
     <header>
         <h1>📚 Онлайн-энциклопедия</h1>
         
-        <!-- Форма поиска через Django Forms -->
+        <!-- Форма поиска -->
         <form method="GET" action="{% url 'home' %}" class="search-form">
-            {{ form.q }}  <!-- Рендерим только поле ввода -->
+            {{ form.q }}
             <button type="submit" class="btn">🔍 Найти</button>
         </form>
 
