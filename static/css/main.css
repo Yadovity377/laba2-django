@@ -1,0 +1,170 @@
+/* Сбрасываем дефолтные стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+main {
+    flex-grow: 1;
+}
+
+/* Светлая тема — ЖЁСТКО ПРОПИСАННЫЕ СТИЛИ */
+.light-theme {
+    background-color: #ffffff !important;
+    color: #333333 !important;
+}
+
+/* Темная тема — ЖЁСТКО ПРОПИСАННЫЕ СТИЛИ */
+.dark-theme {
+    background-color: #1e1e1e !important;
+    color: #f0f0f0 !important;
+}
+
+/* Применяем стили напрямую к body */
+body.light-theme {
+    background-color: #ffffff !important;
+    color: #333333 !important;
+}
+
+body.dark-theme {
+    background-color: #1e1e1e !important;
+    color: #f0f0f0 !important;
+}
+
+/* Стили для остальных элементов — тоже жёсткие */
+body.light-theme header,
+body.light-theme footer,
+body.light-theme .article-card {
+    background-color: #f5f5f5 !important;
+    color: #333333 !important;
+}
+
+body.dark-theme header,
+body.dark-theme footer,
+body.dark-theme .article-card {
+    background-color: #2d2d2d !important;
+    color: #f0f0f0 !important;
+}
+
+body.light-theme .btn {
+    background-color: #007bff !important;
+    color: white !important;
+}
+
+body.dark-theme .btn {
+    background-color: #007bff !important;
+    color: white !important;
+}
+
+body.light-theme .search-input {
+    background-color: #f5f5f5 !important;
+    color: #333333 !important;
+    border-color: #ddd !important;
+}
+
+body.dark-theme .search-input {
+    background-color: #2d2d2d !important;
+    color: #f0f0f0 !important;
+    border-color: #444 !important;
+}
+
+/* Остальные стили — без !important, просто для структуры */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.theme-switcher .btn {
+    margin-left: 15px;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.article-card {
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    transition: transform 0.2s;
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+}
+
+.article-image {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 3rem;
+    width: 100%;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 20px;
+}
+
+.search-input {
+    padding: 8px 12px;
+    border-radius: 4px;
+    min-width: 200px;
+}
+
+.last-search {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    border: 1px solid;
+}
+
+.no-results {
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 2rem 0;
+}
