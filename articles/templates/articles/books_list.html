@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Список книг</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-4">
+        <h2>Список книг</h2>
+
+        <!-- Сообщения Django -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Переключатель источника -->
+        <div class="mb-3">
+            <a href="{% url 'books_list' %}?source=file" class="btn btn-outline-primary {% if source != 'db' %}active{% endif %}">
+                Из файлов (JSON)
+            </a>
+            <a href="{% url 'books_list' %}?source=db" class="btn btn-outline-primary {% if source == 'db' %}active{% endif %}">
+                Из базы данных
+            </a>
+        </div>
+
+        <!-- AJAX-поиск (только для БД) -->
+        {% if source == 'db' %}
+          <div class="mb-4">
+            <label for="search-input" class="form-label">🔍 Поиск по базе данных:</label>
+            <div class="input-group">
+              <input type="text" id="search-input" class="form-control" placeholder="Название, автор или жанр...">
+              <button class="btn btn-outline-secondary" type="button" onclick="document.getElementById('search-input').value=''; document.getElementById('search-results').innerHTML='';">
+                🗑️
+              </button>
+            </div>
+            <div id="search-results" class="mt-2 border rounded bg-white shadow-sm p-3" style="max-height: 300px; overflow-y: auto; display: none;"></div>
+          </div>
+        {% endif %}
+
+        <!-- Основной список книг -->
+        {% if books %}
+          <ul class="list-group">
+            {% for book in books %}
+              <li class="list-group-item">
+                <strong>{{ book.title }}</strong> — {{ book.author }} ({{ book.year }}), {{ book.genre }}
+                {% if source == 'db' %}
+                  <div class="mt-2">
+                    <a href="{% url 'edit_book' book.id %}" class="btn btn-sm btn-outline-primary">✏️ Редактировать</a>
+                    <a href="{% url 'delete_book_db' book.id %}" class="btn btn-sm btn-outline-danger"
+                       onclick="return confirm('Удалить книгу «{{ book.title }}»?')">
+                      🗑️ Удалить
+                    </a>
+                  </div>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-muted">Нет книг для отображения.</p>
+        {% endif %}
+
+        <!-- Кнопка "Добавить книгу" -->
+        <div class="mt-4">
+            <a href="{% url 'add_book' %}" class="btn btn-success">➕ Добавить книгу</a>
+            <a href="{% url 'home' %}" class="btn btn-secondary">🏠 На главную</a>
+        </div>
+    </div>
+
+    <!-- JavaScript для AJAX-поиска (только при source=db) -->
+    {% if source == 'db' %}
+    <script>
+    document.getElementById('search-input').addEventListener('input', function () {
+        const query = this.value.trim();
+        const resultsContainer = document.getElementById('search-results');
+        resultsContainer.style.display = 'none';
+        resultsContainer.innerHTML = '';
+
+        if (query.length < 2) {
+            return;
+        }
+
+        fetch(`/books/search/?q=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(books => {
+                if (books.length === 0) {
+                    resultsContainer.innerHTML = '<div class="text-muted p-2">Ничего не найдено</div>';
+                    resultsContainer.style.display = 'block';
+                    return;
+                }
+
+                resultsContainer.innerHTML = books.map(book =>
+                    `<div class="p-2 mb-1 border-bottom">
+                        <strong>${book.title}</strong><br>
+                        <small class="text-muted">Автор: ${book.author} | Год: ${book.year} | Жанр: ${book.genre}</small>
+                        <div class="mt-1">
+                            <a href="/books/edit/${book.id}/" class="btn btn-sm btn-outline-primary me-1">✏️ Редактировать</a>
+                            <a href="/books/delete-db/${book.id}/" class="btn btn-sm btn-outline-danger"
+                               onclick="return confirm('Удалить книгу «${book.title}»?')">🗑️ Удалить</a>
+                        </div>
+                    </div>`
+                ).join('');
+
+                resultsContainer.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Ошибка поиска:', error);
+                resultsContainer.innerHTML = '<div class="text-danger p-2">Ошибка при поиске</div>';
+                resultsContainer.style.display = 'block';
+            });
+    });
+    </script>
+    {% endif %}
+
+    <!-- Bootstrap JS (опционально, для dismiss у alert) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
