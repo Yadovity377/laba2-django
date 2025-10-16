@@ -1,4 +1,10 @@
-/* Общие стили */
+/* === Общие стили === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
@@ -6,7 +12,7 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-/* Светлая тема */
+/* === Темы === */
 .light-theme {
     --bg-primary: #ffffff;
     --bg-secondary: #f5f5f5;
@@ -18,7 +24,6 @@ body {
     --button-text: white;
 }
 
-/* Темная тема */
 .dark-theme {
     --bg-primary: #1e1e1e;
     --bg-secondary: #2d2d2d;
@@ -30,22 +35,36 @@ body {
     --button-text: white;
 }
 
-/* Применение переменных */
+/* === Применение темы === */
 body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
 }
 
 header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
     background-color: var(--bg-secondary);
     color: var(--text-primary);
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.theme-switcher .btn {
-    background: var(--accent);
-    color: var(--button-text);
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
+/* === Контейнер и сетка === */
 .container {
     max-width: 1200px;
     margin: 2rem auto;
@@ -58,6 +77,7 @@ header {
     gap: 2rem;
 }
 
+/* === Карточки (статьи и книги) === */
 .article-card {
     border: 1px solid var(--border-color);
     border-radius: 10px;
@@ -71,37 +91,27 @@ header {
     transform: translateY(-5px);
 }
 
-.article-image {
-    width: 100%;
-    height: 150px;
-    object-fit: contain;
-    margin-bottom: 1rem;
-}
-
-.article-image-large {
-    width: 100%;
-    max-height: 300px;
-    object-fit: contain;
-    margin-bottom: 1.5rem;
-    border-radius: 8px;
-}
-
-h2 {
+.article-card h3 {
     color: var(--text-primary);
+    margin-top: 0;
 }
 
-h3 {
-    color: var(--text-primary);
+.article-card p {
+    color: var(--text-secondary);
+    margin: 0.5rem 0;
 }
 
+/* === Кнопки === */
 .btn {
     display: inline-block;
     padding: 10px 20px;
     background: var(--accent);
     color: var(--button-text);
     text-decoration: none;
+    border: none;
     border-radius: 5px;
     font-weight: 500;
+    cursor: pointer;
     transition: background 0.2s;
 }
 
@@ -109,50 +119,57 @@ h3 {
     background: #0056b3;
 }
 
-footer {
-    text-align: center;
-    padding: 1.5rem;
-    background-color: var(--bg-secondary);
+/* === Заголовки === */
+h1, h2, h3 {
     color: var(--text-primary);
-    margin-top: 3rem;
 }
 
-.preferences-form {
+h2 {
+    margin-bottom: 1.5rem;
+}
+
+/* === Формы === */
+form {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-left: 20px;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.preferences-form label {
-    font-weight: 500;
-}
-
-.preferences-form select,
-.preferences-form button {
-    padding: 6px 12px;
+input[type="text"],
+input[type="number"],
+input[type="file"],
+select,
+textarea {
+    width: 100%;
+    padding: 8px 12px;
     border: 1px solid var(--border-color);
     border-radius: 4px;
     background: var(--bg-secondary);
     color: var(--text-primary);
 }
 
-.preferences-form button {
+/* Кнопка выбора файла (в Chrome/Edge) */
+input[type="file"]::file-selector-button {
+    padding: 8px 16px;
+    margin-right: 10px;
     background: var(--accent);
     color: var(--button-text);
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
+    transition: background 0.2s;
 }
 
-.preferences-form button:hover {
+input[type="file"]::file-selector-button:hover {
     background: #0056b3;
 }
 
-/* Стили для формы поиска */
+/* === Поиск === */
 .search-form {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-left: 20px;
+    margin-left: auto;
 }
 
 .search-input {
@@ -169,6 +186,21 @@ footer {
     border-color: var(--accent);
 }
 
+/* === Переключатель темы === */
+.theme-switcher {
+    display: flex;
+    gap: 10px;
+}
+
+/* === Навигация по книгам (в шапке) === */
+.book-nav {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* === Сообщения === */
 .last-search {
     background: var(--card-bg);
     padding: 12px;
@@ -182,4 +214,83 @@ footer {
     font-size: 1.2rem;
     color: var(--text-secondary);
     margin: 2rem 0;
+}
+
+/* === Ссылки === */
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    font-weight: 500;
+}
+
+/* === Стили для изображений статей (главная страница) === */
+.article-image-wrapper {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-primary);
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+
+.article-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+/* Добавьте в конец вашего существующего CSS */
+.card {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--card-bg);
+}
+.card-title {
+    color: var(--text-primary);
+}
+.card-text {
+    color: var(--text-secondary);
+}
+.form-check-inline {
+    margin-right: 1rem;
+}
+#search-results {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+/* === Стили для изображений статей (детальная страница) === */
+.article-image-wrapper-large {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-primary);
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+}
+
+.article-image-large {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
 }
