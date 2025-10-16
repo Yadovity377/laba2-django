@@ -1,0 +1,21 @@
+<!-- templates/articles/books_form.html -->
+{% extends 'articles/base.html' %}
+{% block content %}
+
+<div class="container">
+    <h2>Добавить книгу</h2>
+
+    <div class="article-card" style="max-width: 500px; margin: 0 auto;">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">Сохранить в JSON</button>
+        </form>
+    </div>
+
+    <div style="margin-top: 20px; text-align: center;">
+        <a href="{% url 'books_list' %}" class="btn">← Назад к списку книг</a>
+    </div>
+</div>
+
+{% endblock %}
