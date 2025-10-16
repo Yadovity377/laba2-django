@@ -1,17 +1,17 @@
+<!-- templates/articles/base.html -->
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru" data-theme="{{ theme }}">
 <head>
     <meta charset="UTF-8">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📚 Онлайн-энциклопедия</title>
+    <title>{% block title %}📚 Онлайн-энциклопедия{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-
 <body class="{{ theme }}-theme">
     <header>
         <h1>📚 Онлайн-энциклопедия</h1>
-        
+
         <!-- Форма поиска -->
         <form method="GET" action="{% url 'home' %}" class="search-form">
             {{ form.q }}
@@ -23,6 +23,13 @@
             <a href="?theme=light" class="btn">Светлая</a>
             <a href="?theme=dark" class="btn">Темная</a>
         </div>
+
+        <!-- Навигация по новому функционалу -->
+        <nav class="book-nav">
+            <a href="{% url 'add_book' %}" class="btn">📚 Добавить книгу</a>
+            <a href="{% url 'upload_book' %}" class="btn">📁 Загрузить JSON</a>
+            <a href="{% url 'books_list' %}" class="btn">📋 Список книг</a>
+        </nav>
     </header>
 
     <main>
