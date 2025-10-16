@@ -1,11 +1,13 @@
-<!-- articles/templates/articles/article_detail.html -->
+<!-- templates/articles/article_detail.html -->
 {% extends 'articles/base.html' %}
 {% load static %}
 
 {% block content %}
 <div class="container">
     <div class="article-detail">
-        <img src="{{ article.image }}" alt="{{ article.title }}" class="article-image-large">
+        <div class="article-image-wrapper-large">
+            <img src="{% static article.image %}" alt="{{ article.title }}" class="article-image-large">
+        </div>
         <h2>{{ article.title }}</h2>
         <p>{{ article.content }}</p>
         <a href="{% url 'home' %}" class="btn">← Назад к статьям</a>
