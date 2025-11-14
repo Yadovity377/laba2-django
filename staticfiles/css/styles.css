@@ -1,0 +1,1038 @@
+/* === Общие стили === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* === Темы === */
+.light-theme {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f5;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --border-color: #ddd;
+    --card-bg: #fafafa;
+    --accent: #007bff;
+    --button-text: white;
+    --sidebar-bg: #ffffff;
+    --sidebar-border: #ddd;
+    --sidebar-text: #333333;
+    --sidebar-hover: #f0f0f0;
+    --header-bg: #ffffff;
+    --header-border: #ddd;
+    --header-text: #333333;
+    --card-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    --card-hover: #f0f0f0;
+    --accent-hover: #0056b3;
+}
+
+.dark-theme {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --border-color: #333;
+    --card-bg: #2a2a2a;
+    --accent: #ff4d6d; /* розовый */
+    --button-text: white;
+    --sidebar-bg: #1e1e1e;
+    --sidebar-border: #333;
+    --sidebar-text: #e0e0e0;
+    --sidebar-hover: #2d2d2d;
+    --header-bg: #1e1e1e;
+    --header-border: #333;
+    --header-text: #e0e0e0;
+    --card-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    --card-hover: #333;
+    --accent-hover: #ff2a4d;
+}
+
+/* === Применение темы === */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* === Шапка === */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    border-bottom: 1px solid var(--header-border);
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+header .logo img {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+}
+
+header .search-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+header .search-input {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    min-width: 200px;
+}
+
+header .search-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+header .theme-switcher {
+    display: flex;
+    gap: 10px;
+}
+
+header .btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+}
+
+/* === Боковое меню === */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--sidebar-border);
+    padding: 1rem 1.5rem;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.sidebar .menu-item {
+    display: block;
+    padding: 10px 15px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    transition: background 0.2s;
+}
+
+.sidebar .menu-item:hover {
+    background: var(--sidebar-hover);
+}
+
+.sidebar .menu-item.active {
+    background: var(--accent);
+    color: var(--button-text);
+}
+
+.sidebar .menu-section {
+    font-weight: bold;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--sidebar-text);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+.sidebar .menu-divider {
+    height: 1px;
+    background: var(--sidebar-border);
+    margin: 1rem 0;
+}
+
+/* === Основной контент === */
+.main-content {
+    margin-left: 250px;
+    padding: 1.5rem 2rem;
+    min-height: calc(100vh - 60px); /* высота шапки */
+    background: var(--bg-primary);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* === Карточки (статьи и книги) === */
+.article-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 1.5rem;
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    background: var(--card-hover);
+}
+
+.article-card h3 {
+    color: var(--text-primary);
+    margin-top: 0;
+}
+
+.article-card p {
+    color: var(--text-secondary);
+    margin: 0.5rem 0;
+}
+
+/* === Кнопки === */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background: var(--accent);
+    color: var(--button-text);
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background 0.2s;
+    font-size: 0.9rem;
+}
+
+.btn:hover {
+    background: var(--accent-hover);
+}
+
+.btn-primary {
+    background: #007bff;
+}
+
+.btn-success {
+    background: #28a745;
+}
+
+.btn-danger {
+    background: #dc3545;
+}
+
+/* === Заголовки === */
+h1, h2, h3 {
+    color: var(--text-primary);
+}
+
+h2 {
+    margin-bottom: 1.5rem;
+}
+
+/* === Формы === */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"],
+select,
+textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+/* Кнопка выбора файла (в Chrome/Edge) */
+input[type="file"]::file-selector-button {
+    padding: 8px 16px;
+    margin-right: 10px;
+    background: var(--accent);
+    color: var(--button-text);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background: var(--accent-hover);
+}
+
+/* === Поиск === */
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.search-input {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    min-width: 200px;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+/* === Переключатель темы === */
+.theme-switcher {
+    display: flex;
+    gap: 10px;
+}
+
+/* === Навигация по книгам (в шапке) === */
+.book-nav {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* === Сообщения === */
+.last-search {
+    background: var(--card-bg);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.no-results {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin: 2rem 0;
+}
+
+/* === Ссылки === */
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    font-weight: 500;
+}
+
+/* === Стили для изображений статей (главная страница) === */
+.article-image-wrapper {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-primary);
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+
+.article-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+/* === Стили для изображений статей (детальная страница) === */
+.article-image-wrapper-large {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-primary);
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+}
+
+.article-image-large {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* === Подвал === */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    position: static;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 2rem;
+}
+
+/* === Карточки (улучшенные) === */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.card-title {
+    color: var(--text-primary);
+}
+
+.card-text {
+    color: var(--text-secondary);
+}
+
+/* === Стили для форм === */
+.form-container {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    box-shadow: var(--card-shadow);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-actions {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.form-actions .btn {
+    min-width: 150px;
+}
+
+/* === Акцентные цвета для кнопок === */
+.btn-accent {
+    background: var(--accent);
+}
+
+.btn-accent:hover {
+    background: var(--accent-hover);
+}
+
+.btn-success {
+    background: #28a745;
+}
+
+.btn-success:hover {
+    background: #218838;
+}
+
+.btn-danger {
+    background: #dc3545;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+}
+
+/* === Стили для бокового меню (расширенное) === */
+.sidebar .menu-item i {
+    margin-right: 8px;
+    font-size: 1.1rem;
+}
+
+.sidebar .menu-item .badge {
+    margin-left: 8px;
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    border-radius: 10px;
+    background: var(--accent);
+    color: var(--button-text);
+}
+
+/* === Стили для заголовков разделов === */
+.section-header {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0.5rem;
+}
+
+/* === Стили для таблиц === */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.table th,
+.table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid var(--border-color);
+}
+
+.table th {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.table tr:nth-child(even) {
+    background: var(--bg-secondary);
+}
+
+/* === Стили для всплывающих сообщений === */
+.alert {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* === Стили для чекбоксов и радио === */
+.form-check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.form-check-input {
+    margin-right: 8px;
+}
+
+/* === Стили для прогресс-баров === */
+.progress {
+    height: 10px;
+    background: var(--bg-secondary);
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.3s;
+}
+
+/* === Стили для табов === */
+.nav-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+}
+
+.nav-tab {
+    padding: 10px 20px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.nav-tab.active {
+    background: var(--accent);
+    color: var(--button-text);
+}
+
+.tab-content {
+    padding: 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-top: none;
+}
+
+/* === Стили для выпадающих списков === */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: var(--card-bg);
+    min-width: 160px;
+    box-shadow: var(--card-shadow);
+    z-index: 1;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: var(--text-primary);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background: var(--sidebar-hover);
+}
+
+/* === Стили для модальных окон === */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.modal-close {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+}
+
+.modal-body {
+    margin-bottom: 1rem;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* === Стили для пагинации === */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.page-item {
+    margin: 0 5px;
+}
+
+.page-link {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.page-link:hover {
+    background: var(--sidebar-hover);
+}
+
+.page-item.active .page-link {
+    background: var(--accent);
+    color: var(--button-text);
+    border-color: var(--accent);
+}
+
+/* === Стили для тегов === */
+.tag {
+    display: inline-block;
+    padding: 4px 8px;
+    background: var(--bg-secondary);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.tag:hover {
+    background: var(--sidebar-hover);
+}
+
+/* === Стили для рейтингов === */
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.rating-star {
+    font-size: 1.2rem;
+    color: gold;
+    cursor: pointer;
+}
+
+.rating-star:hover,
+.rating-star.active {
+    color: #ffc107;
+}
+
+/* === Стили для аватаров === */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+}
+
+/* === Стили для времени и даты === */
+.time {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-left: 5px;
+}
+
+/* === Стили для ссылок на профиль === */
+.profile-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.profile-link:hover {
+    text-decoration: underline;
+}
+
+/* === Стили для счетчиков === */
+.counter {
+    display: inline-block;
+    padding: 2px 6px;
+    background: var(--accent);
+    color: var(--button-text);
+    border-radius: 10px;
+    font-size: 0.75rem;
+    margin-left: 5px;
+}
+
+/* === Стили для флагов (например, "Новое", "Важно") === */
+.flag {
+    display: inline-block;
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.flag-new {
+    background: #ffc107;
+    color: #212529;
+}
+
+.flag-important {
+    background: #dc3545;
+    color: white;
+}
+
+/* === Стили для тегов категорий === */
+.category-tag {
+    display: inline-block;
+    padding: 4px 8px;
+    background: var(--bg-secondary);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border: 1px solid var(--border-color);
+}
+
+.category-tag:hover {
+    background: var(--sidebar-hover);
+}
+
+/* === Стили для кнопок действий (редактировать, удалить) === */
+.action-btn {
+    padding: 4px 8px;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    margin-left: 5px;
+    transition: background 0.2s;
+}
+
+.action-btn-edit {
+    background: #ffc107;
+    color: #212529;
+}
+
+.action-btn-edit:hover {
+    background: #e0a800;
+}
+
+.action-btn-delete {
+    background: #dc3545;
+    color: white;
+}
+
+.action-btn-delete:hover {
+    background: #c82333;
+}
+
+/* === Стили для блоков информации === */
+.info-box {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+
+.info-box h4 {
+    color: var(--text-primary);
+    margin-top: 0;
+}
+
+.info-box p {
+    color: var(--text-secondary);
+    margin: 0.5rem 0;
+}
+
+/* === Стили для прогресс-баров === */
+.progress-bar-success {
+    background: #28a745;
+}
+
+.progress-bar-danger {
+    background: #dc3545;
+}
+
+.progress-bar-warning {
+    background: #ffc107;
+}
+
+.progress-bar-info {
+    background: #17a2b8;
+}
+
+/* === Стили для вкладок === */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+}
+
+.tab {
+    padding: 10px 20px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.tab.active {
+    background: var(--accent);
+    color: var(--button-text);
+}
+
+.tab-content {
+    padding: 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-top: none;
+}
+
+/* === Стили для выпадающего меню === */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-shadow);
+    z-index: 1000;
+    border-radius: 4px;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu a {
+    color: var(--text-primary);
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu a:hover {
+    background: var(--sidebar-hover);
+}
+
+/* === Стили для попапов === */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: var(--card-shadow);
+    z-index: 1002;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.popup-close {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+}
+
+.popup-body {
+    margin-bottom: 1rem;
+}
+
+.popup-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* === Стили для тултипсов === */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* === Стили для скроллбара === */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* === Стили для печати === */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #print-area, #print-area * {
+        visibility: visible;
+    }
+    #print-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+}
